@@ -1,561 +1,963 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scales Dominator - Increase Patient Consultations for Spine & Pain Clinics</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Scales Dominator - Patient Acquisition Infrastructure</title>
+    <script>
+        const savedTheme = localStorage.getItem("theme");
+        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        if (savedTheme === "dark" || (!savedTheme && prefersDark)) {
+            document.documentElement.classList.add("dark");
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#ea2a33",
+                        "bg-light": "#f8f6f6",
+                        "bg-dark": "#0a0a0a",
+                        "surface-light": "#ffffff",
+                        "surface-subtle": "#f8fafc",
+                        "surface-dark": "#141414",
+                        "border-light": "#e2e8f0",
+                        "border-dark": "#262626",
+                        "text-main": "#0f172a",
+                        "text-muted": "#64748b",
+                    },
+                    fontFamily: {
+                        display: ["Be Vietnam Pro", "sans-serif"],
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' }
+                        },
+                        slideUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        slideDown: {
+                            '0%': { opacity: '0', transform: 'translateY(-30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        slideLeft: {
+                            '0%': { opacity: '0', transform: 'translateX(-30px)' },
+                            '100%': { opacity: '1', transform: 'translateX(0)' }
+                        },
+                        slideRight: {
+                            '0%': { opacity: '0', transform: 'translateX(30px)' },
+                            '100%': { opacity: '1', transform: 'translateX(0)' }
+                        },
+                        scaleIn: {
+                            '0%': { opacity: '0', transform: 'scale(0.95)' },
+                            '100%': { opacity: '1', transform: 'scale(1)' }
+                        },
+                        glow: {
+                            '0%, 100%': { boxShadow: '0 0 20px rgba(234, 42, 51, 0.2)' },
+                            '50%': { boxShadow: '0 0 40px rgba(234, 42, 51, 0.4)' }
+                        },
+                        bounce: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' }
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-8px)' }
+                        }
+                    },
+                    animation: {
+                        fadeIn: 'fadeIn 0.8s ease-out',
+                        slideUp: 'slideUp 0.8s ease-out',
+                        slideDown: 'slideDown 0.8s ease-out',
+                        slideLeft: 'slideLeft 0.8s ease-out',
+                        slideRight: 'slideRight 0.8s ease-out',
+                        scaleIn: 'scaleIn 0.6s ease-out',
+                        glow: 'glow 2s ease-in-out infinite',
+                        bounce: 'bounce 1s ease-in-out infinite',
+                        float: 'float 3s ease-in-out infinite'
+                    }
+                },
+            },
+        };
+    </script>
+    <link rel="stylesheet" href="styles.css" />
 </head>
-<body>
+<body class="bg-bg-light text-text-main dark:bg-bg-dark dark:text-white antialiased overflow-x-hidden">
     <!-- Navigation -->
-    <nav class="navbar">
-        <div class="container">
-            <div class="nav-brand">
-                <span class="logo">Logo</span>
+    <nav class="sticky top-0 z-50 w-full border-b border-border-light dark:border-border-dark bg-white/95 dark:bg-bg-dark/90 backdrop-blur-sm animate-slideDown">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-2 sm:gap-3">
+                <div class="w-8 h-8 text-primary animate-bounce">
+                    <span class="material-symbols-outlined text-3xl">medical_services</span>
+                </div>
+                <span class="text-lg sm:text-xl font-black tracking-tight text-text-main dark:text-white">Scales Dominator</span>
             </div>
-            <div class="nav-right">
-                <a href="tel:333-333-3333" class="phone-link">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-                    </svg>
-                    333-333-3333
-                </a>
-                <button class="btn btn-primary">CTA Button</button>
+            <div class="hidden md:flex items-center gap-6 lg:gap-8">
+                <a class="text-sm font-medium text-text-muted dark:text-gray-300 hover:text-primary transition-colors duration-300" href="#methodology">Methodology</a>
+                <a class="text-sm font-medium text-text-muted dark:text-gray-300 hover:text-primary transition-colors duration-300" href="#results">Results</a>
+                <button onclick="openAuthModal()" class="bg-primary hover:bg-red-600 text-white text-sm font-bold h-10 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-sm">Diagnostic Call</button>
+                <button id="themeToggle" class="h-10 w-10 rounded-lg border border-border-light dark:border-border-dark flex items-center justify-center text-text-main dark:text-white hover:border-primary hover:scale-110 transition-all duration-300" type="button">
+                    <span id="themeIcon" class="material-symbols-outlined text-lg">dark_mode</span>
+                    <span class="sr-only">Toggle theme</span>
+                </button>
             </div>
-            <div class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
+            <button class="md:hidden text-text-main dark:text-white">
+                <span class="material-symbols-outlined">menu</span>
+            </button>
         </div>
     </nav>
 
-    <!-- SECTION 1 - HERO (Above the Fold) -->
-    <section class="hero">
-        <div class="container">
-            <div class="hero-grid">
-                <div class="hero-content">
-                    <div class="social-proof-tag">SOCIAL PROOF #1</div>
-                    <h1 class="hero-headline">Increase Patient Consultations With a Proven Diagnostic System Built for Spine & Pain Clinics</h1>
-                    <p class="hero-subhead">Your clinic is losing consults due to hidden pathway leakage. We install a structured 7-Step Diagnostic Flow that improves patient trust, reduces drop-offs, and increases booked consultations month after month.</p>
-                    
-                    <div class="cta-group">
-                        <button class="btn btn-primary btn-large">Get Your Free Clinic Audit</button>
-                        <button class="btn btn-secondary btn-large">Book a Diagnostic Call</button>
-                    </div>
-
-                    <div class="fud-reduction">
-                        <div class="fud-item">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                            </svg>
-                            <span>HIPAA-Safe Process</span>
-                        </div>
-                        <div class="fud-item">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <polyline points="20 6 9 17 4 12"/>
-                            </svg>
-                            <span>No Complicated Setup</span>
-                        </div>
-                        <div class="fud-item">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="12" cy="12" r="10"/>
-                                <path d="M12 6v6l4 2"/>
-                            </svg>
-                            <span>100% Diagnostic Assessment</span>
-                        </div>
-                        <div class="fud-item">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-                            </svg>
-                            <span>Tailored for Spine & Pain Clinics</span>
-                        </div>
-                    </div>
-
-                    <div class="social-proof-hero">
-                        <blockquote>
-                            <p>"Our patient booking flow transformed within weeks — the leakage we didn't even know existed was fixed."</p>
-                            <cite>— Clinical Director, Houston Spine Group</cite>
-                        </blockquote>
-                        <p class="trust-badge">Trusted for diagnostic clarity by clinics across Texas</p>
-                    </div>
-                </div>
-
-                <div class="hero-visual">
-                    <div class="hero-image-placeholder">
-                        <p>Image or video or form that helps reinforce core value proposition and articulate what it is you do</p>
-                        <div class="workflow-visual">
-                            <div class="workflow-node">Patient Intake</div>
-                            <div class="workflow-arrow">→</div>
-                            <div class="workflow-node">Diagnostic Flow</div>
-                            <div class="workflow-arrow">→</div>
-                            <div class="workflow-node">Consultation</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SECTION 2 - CALL OUT THE ROOT PROBLEM -->
-    <section class="problem-section">
-        <div class="container">
-            <div class="section-content">
-                <h2>Your Clinic Isn't Lacking Patients — It's Losing Them in the Process</h2>
-                <div class="problem-copy">
-                    <p class="lead">Patients click, call, browse your site, check your socials…<br>
-                    But they drop off due to fragmented pathways, unclear booking logic, weak trust signals, slow follow-ups, and no structured conversion system.</p>
-                    <p class="emphasis">You're doing the clinical work well.<br>
-                    But your digital patient experience is leaking consults daily — quietly and consistently.</p>
-                </div>
-
-                <div class="leakage-points">
-                    <h3>Common leakage points we diagnose:</h3>
-                    <ul class="leakage-list">
-                        <li>
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="12" cy="12" r="10"/>
-                                <line x1="15" y1="9" x2="9" y2="15"/>
-                                <line x1="9" y1="9" x2="15" y2="15"/>
-                            </svg>
-                            Confusing or outdated website flow
-                        </li>
-                        <li>
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="12" cy="12" r="10"/>
-                                <line x1="15" y1="9" x2="9" y2="15"/>
-                                <line x1="9" y1="9" x2="15" y2="15"/>
-                            </svg>
-                            Low-trust digital presence
-                        </li>
-                        <li>
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="12" cy="12" r="10"/>
-                                <line x1="15" y1="9" x2="9" y2="15"/>
-                                <line x1="9" y1="9" x2="15" y2="15"/>
-                            </svg>
-                            No structured booking pathway
-                        </li>
-                        <li>
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="12" cy="12" r="10"/>
-                                <line x1="15" y1="9" x2="9" y2="15"/>
-                                <line x1="9" y1="9" x2="15" y2="15"/>
-                            </svg>
-                            Delayed or missing follow-ups
-                        </li>
-                        <li>
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="12" cy="12" r="10"/>
-                                <line x1="15" y1="9" x2="9" y2="15"/>
-                                <line x1="9" y1="9" x2="15" y2="15"/>
-                            </svg>
-                            No nurturing for undecided patients
-                        </li>
-                    </ul>
-                </div>
-
-                <button class="btn btn-primary btn-large">See Your Leakage Map → Free Audit</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- SECTION 3 - AUTHORITATIVE SOCIAL PROOF -->
-    <section class="social-proof-section">
-        <div class="container">
-            <h2>Clinics Across Texas Are Recovering Lost Consults Through Structured Diagnostics</h2>
-            <div class="proof-cards">
-                <div class="proof-card">
-                    <p>"We finally understood why 40% of calls never turned into appointments."</p>
-                </div>
-                <div class="proof-card">
-                    <p>"The diagnostic alone was worth thousands — it showed our real barriers."</p>
-                </div>
-                <div class="proof-card">
-                    <p>"Our patient trust perception improved instantly."</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SECTION 4 - THE DIAGNOSTIC VALUE PROP -->
-    <section class="value-prop-section">
-        <div class="container">
-            <h2>Your Patient Pathway Needs a Clinical System — Not Another Marketing Patch</h2>
-            <p class="section-intro">The Scales Dominator 7-Step Diagnostic Flow identifies and repairs every friction point between "I need help" and "I'm booked for a consult."</p>
-
-            <div class="value-grid">
-                <div class="value-card">
-                    <div class="value-number">1</div>
-                    <h3>Digital Positioning Architecture</h3>
-                    <p><strong>Build instant trust and authority.</strong><br>
-                    We structure your digital presence the way patients intuitively judge clinical credibility.</p>
-                </div>
-
-                <div class="value-card">
-                    <div class="value-number">2</div>
-                    <h3>Conversion-Optimized Website / Landing Architecture</h3>
-                    <p><strong>Turn interest into consultations.</strong><br>
-                    We rebuild your patient flow so visitors know exactly what to do next — and why they should choose you.</p>
-                </div>
-
-                <div class="value-card">
-                    <div class="value-number">3</div>
-                    <h3>Structured Patient Pathway Funnel</h3>
-                    <p><strong>Eliminate confusion at every step.</strong><br>
-                    Clear, guided steps from first click → final consult.</p>
-                </div>
-
-                <div class="value-card">
-                    <div class="value-number">4</div>
-                    <h3>Booking & Show-Up Optimization</h3>
-                    <p><strong>Reduce no-shows and last-minute drop-offs.</strong><br>
-                    Smart reminders, appointment clarity, and psychological reinforcement.</p>
-                </div>
-
-                <div class="value-card">
-                    <div class="value-number">5</div>
-                    <h3>Retargeting Infrastructure (Optional & Compliant)</h3>
-                    <p><strong>Re-capture high-intent patients who bounced.</strong><br>
-                    Designed within healthcare compliance standards.</p>
-                </div>
-            </div>
-
-            <button class="btn btn-primary btn-large">Request Your Free Clinic Audit</button>
-        </div>
-    </section>
-
-    <!-- SECTION 5 - DEEP PAIN SECTION -->
-    <section class="deep-pain-section">
-        <div class="container">
-            <h2>Your Clinic's Growth Isn't Limited by Demand — It's Limited by Structure</h2>
-            <div class="pain-content">
-                <p class="lead">Every clinic wants predictable consult flow.<br>
-                But predictable results require predictable systems.</p>
-
-                <p>Most Spine & Pain clinics rely heavily on:</p>
-                <ul class="pain-list">
-                    <li>referrals</li>
-                    <li>walk-ins</li>
-                    <li>GMB visibility</li>
-                    <li>local SEO luck</li>
-                </ul>
-
-                <p class="emphasis">These channels work only when everything aligns perfectly.</p>
-                <p>But your pathway isn't built for modern patient behavior — so even motivated patients fall out of the flow.</p>
-            </div>
-            <button class="btn btn-primary btn-large">See Exactly Where Patients Are Dropping Off</button>
-        </div>
-    </section>
-
-    <!-- SECTION 6 - UNIQUE MECHANISM (7-Step Diagnostic Flow) -->
-    <section class="mechanism-section">
-        <div class="container">
-            <h2>The 7-Step Diagnostic Flow System Built Exclusively for Spine & Pain Clinics</h2>
-            
-            <div class="steps-container">
-                <div class="step-card">
-                    <div class="step-header">
-                        <span class="step-number">1</span>
-                        <h3>Patient Pathway Audit</h3>
-                    </div>
-                    <p>We map your entire digital-to-consult journey.</p>
-                </div>
-
-                <div class="step-card">
-                    <div class="step-header">
-                        <span class="step-number">2</span>
-                        <h3>Leakage Identification</h3>
-                    </div>
-                    <p>We locate friction points causing silent consult loss.</p>
-                </div>
-
-                <div class="step-card">
-                    <div class="step-header">
-                        <span class="step-number">3</span>
-                        <h3>Trust Architecture Analysis</h3>
-                    </div>
-                    <p>We evaluate your authority and perception signals.</p>
-                </div>
-
-                <div class="step-card">
-                    <div class="step-header">
-                        <span class="step-number">4</span>
-                        <h3>Conversion Path Structuring</h3>
-                    </div>
-                    <p>Clear, guided steps for every type of patient.</p>
-                </div>
-
-                <div class="step-card">
-                    <div class="step-header">
-                        <span class="step-number">5</span>
-                        <h3>Booking Optimization</h3>
-                    </div>
-                    <p>Improve clarity, speed, and completion.</p>
-                </div>
-
-                <div class="step-card">
-                    <div class="step-header">
-                        <span class="step-number">6</span>
-                        <h3>Show-Up Psychology Setup</h3>
-                    </div>
-                    <p>Reminders + clarity increase kept appointments.</p>
-                </div>
-
-                <div class="step-card">
-                    <div class="step-header">
-                        <span class="step-number">7</span>
-                        <h3>Operational Integration</h3>
-                    </div>
-                    <p>Everything fits into your current clinic workflow.</p>
-                </div>
-            </div>
-
-            <button class="btn btn-primary btn-large">Start With a Free Diagnostic Audit</button>
-        </div>
-    </section>
-
-    <!-- SECTION 7 - COMPARISON TABLE -->
-    <section class="comparison-section">
-        <div class="container">
-            <h2>What Makes This System Different From Typical Marketing Services</h2>
-            
-            <div class="comparison-table-wrapper">
-                <table class="comparison-table">
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th class="highlight-col">Scales Dominator</th>
-                            <th>Typical Marketing Agency</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="feature-name">Core Focus</td>
-                            <td class="highlight-col">Patient pathway structure</td>
-                            <td>Ads, posts, surface marketing</td>
-                        </tr>
-                        <tr>
-                            <td class="feature-name">Method</td>
-                            <td class="highlight-col">Diagnostic-driven</td>
-                            <td>Template-driven</td>
-                        </tr>
-                        <tr>
-                            <td class="feature-name">Relevance</td>
-                            <td class="highlight-col">Built for Spine & Pain</td>
-                            <td>Generic healthcare</td>
-                        </tr>
-                        <tr>
-                            <td class="feature-name">Outcome</td>
-                            <td class="highlight-col">Predictable consults</td>
-                            <td>Unpredictable inquiries</td>
-                        </tr>
-                        <tr>
-                            <td class="feature-name">Integration</td>
-                            <td class="highlight-col">Works with clinic operations</td>
-                            <td>Separate from operations</td>
-                        </tr>
-                        <tr>
-                            <td class="feature-name">Risk</td>
-                            <td class="highlight-col">HIPAA-safe, compliance-first</td>
-                            <td>Often non-clinical</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </section>
-
-    <!-- SECTION 8 - HOW IT WORKS -->
-    <section class="how-it-works-section">
-        <div class="container">
-            <h2>Getting Predictable Patient Consultations Is Simpler Than You Think</h2>
-            
-            <div class="process-steps">
-                <div class="process-step">
-                    <div class="process-icon">1</div>
-                    <h3>Request Your Free Audit</h3>
-                    <p>We analyze your clinic's current digital pathway.</p>
-                </div>
-
-                <div class="process-arrow">→</div>
-
-                <div class="process-step">
-                    <div class="process-icon">2</div>
-                    <h3>Receive Your Diagnostic Report</h3>
-                    <p>Clear findings, no jargon — see exactly where you're losing patients.</p>
-                </div>
-
-                <div class="process-arrow">→</div>
-
-                <div class="process-step">
-                    <div class="process-icon">3</div>
-                    <h3>We Install the Structured 7-Step Flow</h3>
-                    <p>Your pathway becomes clear, trusted, and conversion-ready.</p>
-                </div>
-
-                <div class="process-arrow">→</div>
-
-                <div class="process-step">
-                    <div class="process-icon">4</div>
-                    <h3>Watch Consult Volumes Stabilize & Grow</h3>
-                    <p>You get predictable, trackable consult flow month over month.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SECTION 9 - TESTIMONIAL STACK -->
-    <section class="testimonial-section">
-        <div class="container">
-            <h2>Real Clinics. Real Clarity. Real Results.</h2>
-            
-            <div class="testimonial-grid">
-                <div class="testimonial-card">
-                    <p class="testimonial-text">"The clarity this diagnostic provided was game-changing. We immediately saw where our booking process was failing and fixed it within days."</p>
-                    <div class="testimonial-author">
-                        <strong>Dr. Sarah Martinez</strong>
-                        <span>Clinic Director — Houston</span>
-                    </div>
-                </div>
-
-                <div class="testimonial-card">
-                    <p class="testimonial-text">"Our patient trust signals were almost non-existent. After implementing their recommendations, we saw a 60% increase in consultation bookings."</p>
-                    <div class="testimonial-author">
-                        <strong>Dr. James Chen</strong>
-                        <span>Spine Specialist — Dallas</span>
-                    </div>
-                </div>
-
-                <div class="testimonial-card">
-                    <p class="testimonial-text">"Patient flow stabilized for the first time in years. We finally have a system that works predictably, not just when we get lucky."</p>
-                    <div class="testimonial-author">
-                        <strong>Rebecca Thompson</strong>
-                        <span>Practice Manager — Austin</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SECTION 10 - FAQ -->
-    <section class="faq-section">
-        <div class="container">
-            <h2>Frequently Asked Questions</h2>
-            
-            <div class="faq-list">
-                <div class="faq-item">
-                    <h3>How is this different from marketing?</h3>
-                    <p>This is not marketing. It is a diagnostic system that restructures your patient pathway to increase consults predictably.</p>
-                </div>
-
-                <div class="faq-item">
-                    <h3>Will this disrupt our current operations?</h3>
-                    <p>No. The system integrates directly into your existing workflow and enhances efficiency.</p>
-                </div>
-
-                <div class="faq-item">
-                    <h3>Is this HIPAA safe?</h3>
-                    <p>Yes — our diagnostics and communication processes follow HIPAA-safe protocols.</p>
-                </div>
-
-                <div class="faq-item">
-                    <h3>What if we've tried marketing before and it didn't work?</h3>
-                    <p>Most clinics didn't fail due to marketing — they failed due to structural leakage. We fix the root cause.</p>
-                </div>
-
-                <div class="faq-item">
-                    <h3>How long until we see clarity and improvements?</h3>
-                    <p>Most clinics get actionable diagnostics within 48–72 hours.</p>
-                </div>
-
-                <div class="faq-item">
-                    <h3>Do you provide implementation or just recommendations?</h3>
-                    <p>We handle full implementation end-to-end.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SECTION 11 - FINAL CLOSER -->
-    <section class="final-closer">
-        <div class="container">
-            <div class="closer-content">
-                <h2>Start Recovering Lost Patient Consults With a Proven Diagnostic System</h2>
+    <!-- Hero Section with Hierarchical Grid -->
+    <header class="relative min-h-screen flex items-center justify-center overflow-hidden py-12 sm:py-20 lg:py-32 bg-bg-light dark:bg-bg-dark">
+        <div class="absolute inset-0 z-0 opacity-[0.03] dark:opacity-20 dot-grid"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-white/70 to-white dark:via-bg-dark/60 dark:to-bg-dark z-0"></div>
+        
+        <!-- Main Grid Container -->
+        <div class="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Hero Grid: 12 columns -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-center">
                 
-                <ul class="closer-benefits">
-                    <li>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="20 6 9 17 4 12"/>
-                        </svg>
-                        Identify silent leakage points
-                    </li>
-                    <li>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="20 6 9 17 4 12"/>
-                        </svg>
-                        Strengthen patient trust perception
-                    </li>
-                    <li>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="20 6 9 17 4 12"/>
-                        </svg>
-                        Structure your booking flow
-                    </li>
-                    <li>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="20 6 9 17 4 12"/>
-                        </svg>
-                        Improve consult consistency
-                    </li>
-                    <li>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="20 6 9 17 4 12"/>
-                        </svg>
-                        Reduce no-shows
-                    </li>
-                    <li>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="20 6 9 17 4 12"/>
-                        </svg>
-                        Increase operational clarity
-                    </li>
-                </ul>
-
-                <div class="final-cta-group">
-                    <button class="btn btn-primary btn-large">Get Your Free Clinic Audit</button>
-                    <button class="btn btn-secondary btn-large">Book a Diagnostic Call</button>
+                <!-- Left Column: Content (8 cols on desktop, 12 on mobile) -->
+                <div class="lg:col-span-6 animate-slideUp">
+                    <!-- Status Badge -->
+                    <div class="inline-flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-2 rounded-full border border-border-light dark:border-border-dark bg-surface-subtle dark:bg-surface-dark/60 mb-6 sm:mb-8 animate-slideDown">
+                        <span class="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-primary animate-pulse"></span>
+                        <span class="text-xs sm:text-sm font-bold tracking-wider text-text-muted dark:text-gray-300 uppercase">System Status: Active</span>
+                    </div>
+                    
+                    <!-- Main Headline -->
+                    <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black leading-[1.05] tracking-tight mb-6 sm:mb-8 text-text-main dark:text-white animate-slideUp [animation-delay:100ms]">
+                        Increase Patient Consultations With a Proven Diagnostic System
+                    </h1>
+                    
+                    <!-- Subheadline -->
+                    <p class="text-base sm:text-lg md:text-xl text-text-muted dark:text-gray-300 font-light leading-relaxed max-w-2xl mb-8 sm:mb-12 animate-slideUp [animation-delay:200ms]">
+                        Your clinic is losing consults due to hidden pathway leakage. We install a structured 7-Step Diagnostic Flow that improves patient trust and increases booked consultations.
+                    </p>
+                    
+                    <!-- CTA Buttons Grid -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-10 sm:mb-12 animate-slideUp [animation-delay:300ms]">
+                        <button onclick="openAuthModal()" class="bg-primary hover:bg-red-600 text-white text-sm sm:text-base font-bold h-12 sm:h-14 px-6 sm:px-10 rounded-lg sm:rounded-xl transition-all duration-300 shadow-lg hover:shadow-2xl hover:scale-105 flex items-center justify-center gap-2 transform">
+                            <span>Get Free Audit</span>
+                            <span class="material-symbols-outlined text-lg">arrow_forward</span>
+                        </button>
+                        <button onclick="openAuthModal()" class="bg-transparent border-2 border-border-light dark:border-border-dark hover:border-primary text-text-main dark:text-white text-sm sm:text-base font-bold h-12 sm:h-14 px-6 sm:px-10 rounded-lg sm:rounded-xl transition-all duration-300 flex items-center justify-center gap-2 group hover:bg-primary/10">
+                            <span>Book Call</span>
+                            <span class="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform">calendar_month</span>
+                        </button>
+                    </div>
+                    
+                    <!-- Features Grid (2x2) -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 animate-slideUp [animation-delay:400ms]">
+                        <div class="group p-4 sm:p-6 rounded-lg sm:rounded-xl border border-border-light dark:border-border-dark bg-white dark:bg-surface-dark hover:border-primary/50 hover:shadow-lg transition-all duration-300 transform hover:scale-105 cursor-default">
+                            <div class="flex items-center gap-3 mb-2">
+                                <span class="material-symbols-outlined text-primary text-xl sm:text-2xl">verified_user</span>
+                                <span class="text-xs sm:text-sm font-bold text-text-main dark:text-white">HIPAA-Safe</span>
+                            </div>
+                            <p class="text-xs text-text-muted dark:text-gray-400">Complete compliance</p>
+                        </div>
+                        <div class="group p-4 sm:p-6 rounded-lg sm:rounded-xl border border-border-light dark:border-border-dark bg-white dark:bg-surface-dark hover:border-primary/50 hover:shadow-lg transition-all duration-300 transform hover:scale-105 cursor-default">
+                            <div class="flex items-center gap-3 mb-2">
+                                <span class="material-symbols-outlined text-primary text-xl sm:text-2xl">handshake</span>
+                                <span class="text-xs sm:text-sm font-bold text-text-main dark:text-white">Easy Setup</span>
+                            </div>
+                            <p class="text-xs text-text-muted dark:text-gray-400">30-min onboarding</p>
+                        </div>
+                        <div class="group p-4 sm:p-6 rounded-lg sm:rounded-xl border border-border-light dark:border-border-dark bg-white dark:bg-surface-dark hover:border-primary/50 hover:shadow-lg transition-all duration-300 transform hover:scale-105 cursor-default">
+                            <div class="flex items-center gap-3 mb-2">
+                                <span class="material-symbols-outlined text-primary text-xl sm:text-2xl">diagnosis</span>
+                                <span class="text-xs sm:text-sm font-bold text-text-main dark:text-white">100% Assessment</span>
+                            </div>
+                            <p class="text-xs text-text-muted dark:text-gray-400">Comprehensive audit</p>
+                        </div>
+                        <div class="group p-4 sm:p-6 rounded-lg sm:rounded-xl border border-border-light dark:border-border-dark bg-white dark:bg-surface-dark hover:border-primary/50 hover:shadow-lg transition-all duration-300 transform hover:scale-105 cursor-default">
+                            <div class="flex items-center gap-3 mb-2">
+                                <span class="material-symbols-outlined text-primary text-xl sm:text-2xl">trending_up</span>
+                                <span class="text-xs sm:text-sm font-bold text-text-main dark:text-white">+142% Growth</span>
+                            </div>
+                            <p class="text-xs text-text-muted dark:text-gray-400">Proven results</p>
+                        </div>
+                    </div>
                 </div>
-
-                <div class="final-social-proof">
-                    <blockquote>
-                        <p>"Every clinic should get this diagnostic — it changes how you look at patient flow forever."</p>
-                    </blockquote>
-                </div>
-
-                <div class="final-fud">
-                    <span>HIPAA-safe</span>
-                    <span>•</span>
-                    <span>No complexity</span>
-                    <span>•</span>
-                    <span>Diagnostic-first</span>
-                    <span>•</span>
-                    <span>Tailored for Spine & Pain Clinics</span>
+                
+                <!-- Right Column: Visual (4 cols on desktop, 12 on mobile) -->
+                <div class="lg:col-span-6 w-full animate-slideRight [animation-delay:200ms]">
+                    <div class="relative">
+                        <!-- Main Image Card -->
+                        <div class="relative rounded-lg sm:rounded-2xl overflow-hidden border border-border-light dark:border-border-dark bg-surface-subtle dark:bg-surface-dark shadow-2xl hover:shadow-2xl transition-all duration-300 group">
+                            <div class="aspect-square sm:aspect-[4/3] relative">
+                                <div class="absolute inset-0 bg-gradient-to-t from-surface-light via-transparent to-transparent dark:from-bg-dark/80 dark:via-transparent dark:to-transparent z-10 opacity-70"></div>
+                                <img alt="Modern medical clinic" class="w-full h-full object-cover grayscale opacity-90 group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxBPluOdaQVgab7h3Dt76lthqcG5BmJf5M8fjIbPOES1ou1SzRtMg70tzQOQwia0lUAjhORlzNtPKTgs7_Xj1YiBo9bwjfqbniVbXnCzJGAvofESuQvzbpfrg2k6jZ4AIE4Rp-lEgB0I7QNYWY87XjwoK40rW3RIX3Bl1cXv1Tmv-imTMCJ8x2wciRNUqu4DOFjoynbg6GQEz-B_uGMTspd1IZ_5-7nhp_ilxJiAAyqKYPOiG8zdxkgAhu-osu7pPKIIXzF0o6PjQ" />
+                            </div>
+                        </div>
+                        
+                        <!-- Stats Card (floating) -->
+                        <div class="absolute -bottom-4 -right-4 sm:bottom-6 sm:right-6 p-4 sm:p-5 bg-white dark:bg-surface-dark backdrop-blur border border-border-light dark:border-border-dark rounded-lg sm:rounded-xl shadow-xl animate-float">
+                            <div class="flex items-center gap-3 sm:gap-4">
+                                <div class="flex flex-col">
+                                    <p class="text-xs text-text-muted dark:text-gray-400 uppercase tracking-wider font-bold">Patient Volume</p>
+                                    <p class="text-2xl sm:text-3xl font-black text-primary">+142%</p>
+                                </div>
+                                <div class="h-12 flex items-end gap-1">
+                                    <div class="w-1 sm:w-1.5 bg-slate-300 dark:bg-border-dark h-4 rounded-sm animate-slideUp [animation-delay:0ms]"></div>
+                                    <div class="w-1 sm:w-1.5 bg-slate-300 dark:bg-border-dark h-6 rounded-sm animate-slideUp [animation-delay:100ms]"></div>
+                                    <div class="w-1 sm:w-1.5 bg-slate-300 dark:bg-border-dark h-5 rounded-sm animate-slideUp [animation-delay:200ms]"></div>
+                                    <div class="w-1 sm:w-1.5 bg-primary h-8 rounded-sm animate-slideUp [animation-delay:300ms]"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </div>
+    </header>
+
+    <!-- Trusted Brands Section -->
+    <section class="border-y border-border-light dark:border-border-dark bg-surface-subtle dark:bg-surface-dark py-12 sm:py-16 lg:py-20 animate-slideUp">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <p class="text-center text-text-muted dark:text-gray-400 text-xs sm:text-sm font-bold tracking-widest uppercase mb-8 sm:mb-12">Trusted by Elite Practices</p>
+            <!-- 4-Column Responsive Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 opacity-60 hover:opacity-100 transition-all duration-500">
+                <div class="flex items-center justify-center gap-2 sm:gap-3 p-4 sm:p-6 rounded-lg border border-border-light dark:border-border-dark bg-white dark:bg-bg-dark hover:border-primary hover:shadow-lg transition-all transform hover:scale-105 group">
+                    <span class="material-symbols-outlined text-xl sm:text-2xl text-text-main dark:text-white group-hover:text-primary transition-colors">cardiology</span>
+                    <span class="text-sm sm:text-base font-black text-text-main dark:text-white">SPINE CENTER</span>
+                </div>
+                <div class="flex items-center justify-center gap-2 sm:gap-3 p-4 sm:p-6 rounded-lg border border-border-light dark:border-border-dark bg-white dark:bg-bg-dark hover:border-primary hover:shadow-lg transition-all transform hover:scale-105 group">
+                    <span class="material-symbols-outlined text-xl sm:text-2xl text-text-main dark:text-white group-hover:text-primary transition-colors">neurology</span>
+                    <span class="text-sm sm:text-base font-black text-text-main dark:text-white">NEURO PAIN</span>
+                </div>
+                <div class="flex items-center justify-center gap-2 sm:gap-3 p-4 sm:p-6 rounded-lg border border-border-light dark:border-border-dark bg-white dark:bg-bg-dark hover:border-primary hover:shadow-lg transition-all transform hover:scale-105 group">
+                    <span class="material-symbols-outlined text-xl sm:text-2xl text-text-main dark:text-white group-hover:text-primary transition-colors">orthopedics</span>
+                    <span class="text-sm sm:text-base font-black text-text-main dark:text-white">ORTHO ELITE</span>
+                </div>
+                <div class="flex items-center justify-center gap-2 sm:gap-3 p-4 sm:p-6 rounded-lg border border-border-light dark:border-border-dark bg-white dark:bg-bg-dark hover:border-primary hover:shadow-lg transition-all transform hover:scale-105 group">
+                    <span class="material-symbols-outlined text-xl sm:text-2xl text-text-main dark:text-white group-hover:text-primary transition-colors">monitor_heart</span>
+                    <span class="text-sm sm:text-base font-black text-text-main dark:text-white">APEX MED</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section with Hierarchical Grid -->
+    <section id="root-problem" class="py-12 sm:py-20 lg:py-32 bg-surface-light dark:bg-bg-dark relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Header -->
+            <div class="text-center mb-10 sm:mb-16 lg:mb-20 animate-slideUp">
+                <span class="inline-block text-xs sm:text-sm font-bold tracking-wider text-primary uppercase mb-3 sm:mb-4">The Leakage Reality</span>
+                <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black leading-tight mb-4 sm:mb-6 text-text-main dark:text-white">
+                    Your Clinic Isn't Lacking Patients — It's Losing Them
+                </h2>
+                <p class="text-base sm:text-lg text-text-muted dark:text-gray-300 leading-relaxed max-w-3xl mx-auto mb-4 sm:mb-6">
+                    Patients click, call, browse your site... but they drop off due to fragmented pathways and weak trust signals.
+                </p>
+                <p class="text-base sm:text-lg text-text-muted dark:text-gray-300 leading-relaxed max-w-3xl mx-auto">
+                    You're doing clinical work well. But your digital experience is leaking consults daily.
+                </p>
+            </div>
+
+            <!-- Leakage Points: 3-Column Grid (responsive) -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-10 sm:mb-16 animate-slideUp [animation-delay:100ms]">
+                <!-- Card 1 -->
+                <div class="group p-6 sm:p-8 rounded-lg sm:rounded-xl border-2 border-red-200 dark:border-red-900/30 bg-white dark:bg-surface-dark hover:border-primary hover:shadow-xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-2">
+                    <div class="flex items-start gap-3 sm:gap-4">
+                        <div class="flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14 rounded-lg sm:rounded-xl bg-red-50 dark:bg-red-900/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">warning</span>
+                        </div>
+                        <div>
+                            <h4 class="text-base sm:text-lg font-bold text-text-main dark:text-white mb-1">Website Flow Issues</h4>
+                            <p class="text-xs sm:text-sm text-text-muted dark:text-gray-400">Confusing navigation</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 2 -->
+                <div class="group p-6 sm:p-8 rounded-lg sm:rounded-xl border-2 border-red-200 dark:border-red-900/30 bg-white dark:bg-surface-dark hover:border-primary hover:shadow-xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-2">
+                    <div class="flex items-start gap-3 sm:gap-4">
+                        <div class="flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14 rounded-lg sm:rounded-xl bg-red-50 dark:bg-red-900/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">warning</span>
+                        </div>
+                        <div>
+                            <h4 class="text-base sm:text-lg font-bold text-text-main dark:text-white mb-1">Trust Problems</h4>
+                            <p class="text-xs sm:text-sm text-text-muted dark:text-gray-400">Low-trust presence</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 3 -->
+                <div class="group p-6 sm:p-8 rounded-lg sm:rounded-xl border-2 border-red-200 dark:border-red-900/30 bg-white dark:bg-surface-dark hover:border-primary hover:shadow-xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-2">
+                    <div class="flex items-start gap-3 sm:gap-4">
+                        <div class="flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14 rounded-lg sm:rounded-xl bg-red-50 dark:bg-red-900/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">warning</span>
+                        </div>
+                        <div>
+                            <h4 class="text-base sm:text-lg font-bold text-text-main dark:text-white mb-1">Booking Barriers</h4>
+                            <p class="text-xs sm:text-sm text-text-muted dark:text-gray-400">No booking pathway</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 4 -->
+                <div class="group p-6 sm:p-8 rounded-lg sm:rounded-xl border-2 border-red-200 dark:border-red-900/30 bg-white dark:bg-surface-dark hover:border-primary hover:shadow-xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-2">
+                    <div class="flex items-start gap-3 sm:gap-4">
+                        <div class="flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14 rounded-lg sm:rounded-xl bg-red-50 dark:bg-red-900/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">warning</span>
+                        </div>
+                        <div>
+                            <h4 class="text-base sm:text-lg font-bold text-text-main dark:text-white mb-1">Follow-up Gaps</h4>
+                            <p class="text-xs sm:text-sm text-text-muted dark:text-gray-400">Delayed responses</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 5 -->
+                <div class="group p-6 sm:p-8 rounded-lg sm:rounded-xl border-2 border-red-200 dark:border-red-900/30 bg-white dark:bg-surface-dark hover:border-primary hover:shadow-xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-2">
+                    <div class="flex items-start gap-3 sm:gap-4">
+                        <div class="flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14 rounded-lg sm:rounded-xl bg-red-50 dark:bg-red-900/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">warning</span>
+                        </div>
+                        <div>
+                            <h4 class="text-base sm:text-lg font-bold text-text-main dark:text-white mb-1">Nurturing Missing</h4>
+                            <p class="text-xs sm:text-sm text-text-muted dark:text-gray-400">No patient nurturing</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- CTA Card -->
+                <div class="sm:col-span-2 lg:col-span-1 flex items-center justify-center">
+                    <button onclick="openAuthModal()" class="w-full bg-primary hover:bg-red-600 text-white text-base sm:text-lg font-bold h-14 sm:h-16 px-6 sm:px-10 rounded-lg sm:rounded-xl transition-all duration-300 shadow-lg hover:shadow-2xl flex items-center justify-center gap-2 group transform hover:scale-105">
+                        See Leakage Map
+                        <span class="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform">chevron_right</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Data Visualization Card -->
+            <div class="p-6 sm:p-8 lg:p-10 bg-white dark:bg-surface-dark border-2 border-border-light dark:border-border-dark rounded-lg sm:rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 animate-slideUp [animation-delay:200ms]">
+                <div class="flex items-start justify-between mb-6 sm:mb-10">
+                    <h3 class="text-lg sm:text-xl lg:text-2xl font-black text-text-main dark:text-white">Typical Clinic Leakage Funnel</h3>
+                    <span class="material-symbols-outlined text-slate-300 dark:text-border-dark text-5xl sm:text-7xl">trending_down</span>
+                </div>
+                <div class="space-y-6 sm:space-y-8">
+                    <!-- Progress Item 1 -->
+                    <div class="animate-slideUp [animation-delay:0ms]">
+                        <div class="flex justify-between items-end mb-2">
+                            <span class="text-xs sm:text-sm font-semibold text-text-muted dark:text-gray-400">Leads Generated</span>
+                            <span class="text-xs sm:text-sm font-bold text-text-main dark:text-white">100%</span>
+                        </div>
+                        <div class="w-full bg-border-light dark:bg-border-dark h-2 sm:h-3 rounded-full overflow-hidden">
+                            <div class="bg-gradient-to-r from-slate-400 to-slate-500 dark:from-gray-400 dark:to-gray-500 h-full rounded-full w-full animate-slideLeft" style="animation-delay: 0ms;"></div>
+                        </div>
+                    </div>
+                    <!-- Progress Item 2 -->
+                    <div class="animate-slideUp [animation-delay:100ms]">
+                        <div class="flex justify-between items-end mb-2">
+                            <span class="text-xs sm:text-sm font-semibold text-text-muted dark:text-gray-400">Contacted within 5 mins</span>
+                            <span class="text-xs sm:text-sm font-bold text-primary">22%</span>
+                        </div>
+                        <div class="w-full bg-border-light dark:bg-border-dark h-2 sm:h-3 rounded-full overflow-hidden">
+                            <div class="bg-gradient-to-r from-primary to-red-500 h-full rounded-full w-[22%] animate-slideLeft" style="animation-delay: 100ms;"></div>
+                        </div>
+                        <p class="text-xs text-red-500 dark:text-red-400 mt-2 font-bold">Critical drop-off</p>
+                    </div>
+                    <!-- Progress Item 3 -->
+                    <div class="animate-slideUp [animation-delay:200ms]">
+                        <div class="flex justify-between items-end mb-2">
+                            <span class="text-xs sm:text-sm font-semibold text-text-muted dark:text-gray-400">Booked Appointment</span>
+                            <span class="text-xs sm:text-sm font-bold text-primary">8%</span>
+                        </div>
+                        <div class="w-full bg-border-light dark:bg-border-dark h-2 sm:h-3 rounded-full overflow-hidden">
+                            <div class="bg-gradient-to-r from-primary to-red-500 h-full rounded-full w-[8%] animate-slideLeft" style="animation-delay: 200ms;"></div>
+                        </div>
+                    </div>
+                    <!-- Progress Item 4 -->
+                    <div class="animate-slideUp [animation-delay:300ms]">
+                        <div class="flex justify-between items-end mb-2">
+                            <span class="text-xs sm:text-sm font-semibold text-text-muted dark:text-gray-400">Actually Showed Up</span>
+                            <span class="text-xs sm:text-sm font-bold text-primary">5%</span>
+                        </div>
+                        <div class="w-full bg-border-light dark:bg-border-dark h-2 sm:h-3 rounded-full overflow-hidden">
+                            <div class="bg-gradient-to-r from-primary to-red-500 h-full rounded-full w-[5%] animate-slideLeft" style="animation-delay: 300ms;"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Revenue Loss Card -->
+                <div class="mt-8 sm:mt-10 p-4 sm:p-6 border-2 border-primary/20 dark:border-primary/40 bg-primary/10 dark:bg-primary/10 rounded-lg sm:rounded-xl">
+                    <p class="text-center text-sm sm:text-base text-primary font-bold">
+                        Annual Revenue Lost Per Clinic:
+                        <span class="block text-lg sm:text-xl text-text-main dark:text-white mt-1">$480,000+</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Value Proposition Section (7-Step Diagnostic Flow) -->
+    <section class="py-12 sm:py-20 lg:py-32 bg-surface-light dark:bg-bg-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Header -->
+            <div class="max-w-3xl mx-auto text-center mb-10 sm:mb-16 lg:mb-20 animate-slideUp">
+                <span class="inline-block text-xs sm:text-sm font-bold tracking-wider text-primary uppercase mb-4 sm:mb-6">The Diagnostic Value Prop</span>
+                <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black leading-tight mb-6 sm:mb-8 text-text-main dark:text-white">
+                    Your Patient Pathway Needs a Clinical System — Not Another Marketing Patch
+                </h2>
+                <p class="text-base sm:text-lg text-text-muted dark:text-gray-300 leading-relaxed max-w-2xl mx-auto">
+                    The Scales Dominator 7-Step Diagnostic Flow identifies and repairs every friction point between "I need help" and "I'm booked for a consult."
+                </p>
+            </div>
+
+            <!-- Value Props: Alternating Text-Image Layout -->
+            <div class="space-y-12 sm:space-y-16 lg:space-y-20">
+                
+                <!-- Value Prop 1: Text Left, Image Right -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center animate-slideUp [animation-delay:0ms]">
+                    <!-- Text Content -->
+                    <div class="order-2 lg:order-1 flex flex-col justify-center">
+                        <span class="inline-block text-xs sm:text-sm font-bold tracking-wider text-primary uppercase mb-4 w-fit">Architecture</span>
+                        <h3 class="text-2xl sm:text-3xl lg:text-4xl font-black text-text-main dark:text-white mb-4 sm:mb-6 leading-tight">Digital Positioning Architecture</h3>
+                        <p class="text-base sm:text-lg text-text-muted dark:text-gray-400 mb-6 sm:mb-8 leading-relaxed">
+                            Build instant trust and authority. We structure your digital presence the way patients intuitively judge clinical credibility — creating an unfair advantage in your market.
+                        </p>
+                        <button onclick="openAuthModal()" class="w-full sm:w-auto bg-primary hover:bg-red-600 text-white text-base sm:text-lg font-bold h-12 sm:h-14 px-8 sm:px-12 rounded-lg sm:rounded-xl transition-all duration-300 shadow-lg hover:shadow-2xl transform hover:scale-105 flex items-center justify-center gap-2 group">
+                            Learn More
+                            <span class="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                        </button>
+                    </div>
+                    <!-- Image Placeholder -->
+                    <div class="order-1 lg:order-2 min-h-[300px] sm:min-h-[350px] lg:min-h-[400px] rounded-lg sm:rounded-2xl bg-gradient-to-br from-primary/20 to-red-500/20 dark:from-primary/30 dark:to-red-500/30 border-2 border-primary/30 dark:border-primary/40 flex items-center justify-center animate-slideUp [animation-delay:100ms]">
+                        <div class="text-center">
+                            <span class="material-symbols-outlined text-primary/40 text-7xl sm:text-8xl">image</span>
+                            <p class="text-text-muted dark:text-gray-500 text-sm mt-4">Design Mockup</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Value Prop 2: Image Left, Text Right -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center animate-slideUp [animation-delay:100ms]">
+                    <!-- Image Placeholder -->
+                    <div class="order-1 min-h-[300px] sm:min-h-[350px] lg:min-h-[400px] rounded-lg sm:rounded-2xl bg-gradient-to-br from-primary/20 to-red-500/20 dark:from-primary/30 dark:to-red-500/30 border-2 border-primary/30 dark:border-primary/40 flex items-center justify-center animate-slideUp [animation-delay:100ms]">
+                        <div class="text-center">
+                            <span class="material-symbols-outlined text-primary/40 text-7xl sm:text-8xl">image</span>
+                            <p class="text-text-muted dark:text-gray-500 text-sm mt-4">Conversion Flow</p>
+                        </div>
+                    </div>
+                    <!-- Text Content -->
+                    <div class="order-2 flex flex-col justify-center">
+                        <span class="inline-block text-xs sm:text-sm font-bold tracking-wider text-primary uppercase mb-4 w-fit">Optimization</span>
+                        <h3 class="text-2xl sm:text-3xl lg:text-4xl font-black text-text-main dark:text-white mb-4 sm:mb-6 leading-tight">Conversion-Optimized Architecture</h3>
+                        <p class="text-base sm:text-lg text-text-muted dark:text-gray-400 mb-6 sm:mb-8 leading-relaxed">
+                            Turn interest into consultations. We rebuild your patient flow so visitors know exactly what to do next — and why they should choose you over every other option.
+                        </p>
+                        <button onclick="openAuthModal()" class="w-full sm:w-auto bg-primary hover:bg-red-600 text-white text-base sm:text-lg font-bold h-12 sm:h-14 px-8 sm:px-12 rounded-lg sm:rounded-xl transition-all duration-300 shadow-lg hover:shadow-2xl transform hover:scale-105 flex items-center justify-center gap-2 group">
+                            Explore System
+                            <span class="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Value Prop 3: Text Left, Image Right -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center animate-slideUp [animation-delay:200ms]">
+                    <!-- Text Content -->
+                    <div class="order-2 lg:order-1 flex flex-col justify-center">
+                        <span class="inline-block text-xs sm:text-sm font-bold tracking-wider text-primary uppercase mb-4 w-fit">Pathway</span>
+                        <h3 class="text-2xl sm:text-3xl lg:text-4xl font-black text-text-main dark:text-white mb-4 sm:mb-6 leading-tight">Structured Patient Pathway Funnel</h3>
+                        <p class="text-base sm:text-lg text-text-muted dark:text-gray-400 mb-6 sm:mb-8 leading-relaxed">
+                            Eliminate confusion at every step. Clear, guided steps from first click → consultation → scheduled appointment. No patient gets lost.
+                        </p>
+                        <button onclick="openAuthModal()" class="w-full sm:w-auto bg-primary hover:bg-red-600 text-white text-base sm:text-lg font-bold h-12 sm:h-14 px-8 sm:px-12 rounded-lg sm:rounded-xl transition-all duration-300 shadow-lg hover:shadow-2xl transform hover:scale-105 flex items-center justify-center gap-2 group">
+                            See Blueprint
+                            <span class="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                        </button>
+                    </div>
+                    <!-- Image Placeholder -->
+                    <div class="order-1 lg:order-2 min-h-[300px] sm:min-h-[350px] lg:min-h-[400px] rounded-lg sm:rounded-2xl bg-gradient-to-br from-primary/20 to-red-500/20 dark:from-primary/30 dark:to-red-500/30 border-2 border-primary/30 dark:border-primary/40 flex items-center justify-center animate-slideUp [animation-delay:200ms]">
+                        <div class="text-center">
+                            <span class="material-symbols-outlined text-primary/40 text-7xl sm:text-8xl">image</span>
+                            <p class="text-text-muted dark:text-gray-500 text-sm mt-4">Funnel Chart</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Value Prop 4: Image Left, Text Right -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center animate-slideUp [animation-delay:300ms]">
+                    <!-- Image Placeholder -->
+                    <div class="order-1 min-h-[300px] sm:min-h-[350px] lg:min-h-[400px] rounded-lg sm:rounded-2xl bg-gradient-to-br from-primary/20 to-red-500/20 dark:from-primary/30 dark:to-red-500/30 border-2 border-primary/30 dark:border-primary/40 flex items-center justify-center animate-slideUp [animation-delay:300ms]">
+                        <div class="text-center">
+                            <span class="material-symbols-outlined text-primary/40 text-7xl sm:text-8xl">image</span>
+                            <p class="text-text-muted dark:text-gray-500 text-sm mt-4">Booking System</p>
+                        </div>
+                    </div>
+                    <!-- Text Content -->
+                    <div class="order-2 flex flex-col justify-center">
+                        <span class="inline-block text-xs sm:text-sm font-bold tracking-wider text-primary uppercase mb-4 w-fit">Completion</span>
+                        <h3 class="text-2xl sm:text-3xl lg:text-4xl font-black text-text-main dark:text-white mb-4 sm:mb-6 leading-tight">Booking & Show-Up Optimization</h3>
+                        <p class="text-base sm:text-lg text-text-muted dark:text-gray-400 mb-6 sm:mb-8 leading-relaxed">
+                            Reduce no-shows and last-minute drop-offs with smart reminders, appointment clarity, and psychological reinforcement that keeps patients committed.
+                        </p>
+                        <button onclick="openAuthModal()" class="w-full sm:w-auto bg-primary hover:bg-red-600 text-white text-base sm:text-lg font-bold h-12 sm:h-14 px-8 sm:px-12 rounded-lg sm:rounded-xl transition-all duration-300 shadow-lg hover:shadow-2xl transform hover:scale-105 flex items-center justify-center gap-2 group">
+                            Get Details
+                            <span class="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- CTA Button -->
+            <div class="flex items-center justify-center pt-8 sm:pt-12 lg:pt-16 animate-slideUp [animation-delay:400ms]">
+                <button onclick="openAuthModal()" class="w-full sm:w-auto bg-primary hover:bg-red-600 text-white text-base sm:text-lg font-bold h-14 sm:h-16 px-8 sm:px-12 rounded-lg sm:rounded-xl transition-all duration-300 shadow-lg hover:shadow-2xl transform hover:scale-105 flex items-center justify-center gap-2 group">
+                    Request Your Free Clinic Audit
+                    <span class="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform">chevron_right</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Proof Section #1: Alternating Text-Image -->
+    <section id="trust" class="py-12 sm:py-20 lg:py-32 bg-surface-light dark:bg-surface-dark border-y border-border-light dark:border-border-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Social Proof #1 -->
+            <div class="mb-16 sm:mb-20 lg:mb-24">
+                <span class="inline-block text-xs sm:text-sm font-bold tracking-wider text-primary uppercase mb-6 sm:mb-8">Social Proof #1</span>
+                
+                <!-- Alternating Text-Image Layout -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center animate-slideUp">
+                    <!-- Text Content -->
+                    <div class="order-2 lg:order-1 flex flex-col justify-center">
+                        <h2 class="text-2xl sm:text-3xl lg:text-4xl font-black text-text-main dark:text-white mb-4 sm:mb-6 leading-tight">
+                            Dream outcome and 'what's in it for me'
+                        </h2>
+                        <p class="text-base sm:text-lg text-text-muted dark:text-gray-400 mb-6 sm:mb-8 leading-relaxed">
+                            Showcasing [X] Theorem X / Pain Point. Our solution does a, b, c from time to benefit acquisition & expectation & gain / loss you do by yourself.
+                        </p>
+                        <button onclick="openAuthModal()" class="w-full sm:w-auto bg-primary hover:bg-red-600 text-white text-base sm:text-lg font-bold h-12 sm:h-14 px-8 sm:px-12 rounded-lg sm:rounded-xl transition-all duration-300 shadow-lg hover:shadow-2xl transform hover:scale-105">
+                            Main Action to Take
+                        </button>
+                        <p class="text-xs text-text-muted dark:text-gray-500 mt-4 sm:mt-6">*REDUCE FRICTION AND SHORTEN UNCERTAINTY TIMELINE</p>
+                    </div>
+                    <!-- Image Placeholder -->
+                    <div class="order-1 lg:order-2 min-h-[250px] sm:min-h-[300px] lg:min-h-[350px] rounded-lg sm:rounded-xl border-2 border-border-light dark:border-border-dark bg-white dark:bg-bg-dark flex items-center justify-center animate-slideUp [animation-delay:100ms]">
+                        <div class="text-center">
+                            <span class="material-symbols-outlined text-border-light dark:text-border-dark text-6xl sm:text-7xl">image</span>
+                            <p class="text-text-muted dark:text-gray-500 text-sm mt-3">Image or video form that helps understand</p>
+                            <p class="text-text-muted dark:text-gray-500 text-sm">how to solve the pain and</p>
+                            <p class="text-text-muted dark:text-gray-500 text-sm">articulate what it is you do</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Divider -->
+            <div class="border-t border-border-light dark:border-border-dark my-12 sm:my-16 lg:my-20"></div>
+
+            <!-- Social Proof #2: Stats & Testimonials -->
+            <div>
+                <div class="text-center mb-10 sm:mb-16">
+                    <span class="inline-block text-xs sm:text-sm font-bold tracking-wider text-primary uppercase mb-4 sm:mb-6">Social Proof #2</span>
+                    <h2 class="text-2xl sm:text-3xl lg:text-4xl font-black text-text-main dark:text-white mb-2 sm:mb-4">
+                        Social Proof Section
+                    </h2>
+                    <p class="text-base sm:text-lg text-text-muted dark:text-gray-400">
+                        (Stats, Testimonials, Case Studies, etc.)
+                    </p>
+                </div>
+
+                <!-- 3-Column Testimonials Grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-10 sm:mb-14">
+                    <!-- Social Proof Card 1 -->
+                    <div class="p-8 sm:p-10 rounded-lg sm:rounded-xl border-2 border-border-light dark:border-border-dark bg-white dark:bg-bg-dark hover:border-primary/50 hover:shadow-xl transition-all duration-300 transform hover:scale-105 animate-slideUp [animation-delay:0ms]">
+                        <div class="min-h-[200px] sm:min-h-[240px] flex items-center justify-center">
+                            <p class="text-center text-text-muted dark:text-gray-500 font-semibold">Social Proof</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Social Proof Card 2 -->
+                    <div class="p-8 sm:p-10 rounded-lg sm:rounded-xl border-2 border-border-light dark:border-border-dark bg-white dark:bg-bg-dark hover:border-primary/50 hover:shadow-xl transition-all duration-300 transform hover:scale-105 animate-slideUp [animation-delay:100ms]">
+                        <div class="min-h-[200px] sm:min-h-[240px] flex items-center justify-center">
+                            <p class="text-center text-text-muted dark:text-gray-500 font-semibold">Social Proof</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Social Proof Card 3 -->
+                    <div class="p-8 sm:p-10 rounded-lg sm:rounded-xl border-2 border-border-light dark:border-border-dark bg-white dark:bg-bg-dark hover:border-primary/50 hover:shadow-xl transition-all duration-300 transform hover:scale-105 animate-slideUp [animation-delay:200ms]">
+                        <div class="min-h-[200px] sm:min-h-[240px] flex items-center justify-center">
+                            <p class="text-center text-text-muted dark:text-gray-500 font-semibold">Social Proof</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CTA Button -->
+                <div class="flex items-center justify-center pt-4 sm:pt-6">
+                    <button onclick="openAuthModal()" class="bg-primary hover:bg-red-600 text-white text-base sm:text-lg font-bold h-12 sm:h-14 px-8 sm:px-12 rounded-lg sm:rounded-xl transition-all duration-300 shadow-lg hover:shadow-2xl transform hover:scale-105">
+                        Main Action to Take
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 5: Deep Pain Section -->
+    <section class="py-12 sm:py-20 lg:py-32 bg-surface-light dark:bg-bg-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-4xl mx-auto">
+                <!-- Header -->
+                <div class="text-center mb-10 sm:mb-16 lg:mb-20 animate-slideUp">
+                    <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-text-main dark:text-white mb-6 sm:mb-8 leading-tight">
+                        Your Clinic's Growth Isn't Limited by Demand — It's Limited by Structure
+                    </h2>
+                </div>
+
+                <!-- Body Copy -->
+                <div class="prose dark:prose-invert max-w-3xl mx-auto animate-slideUp [animation-delay:100ms]">
+                    <div class="space-y-6 sm:space-y-8 mb-8 sm:mb-12 lg:mb-16">
+                        <p class="text-lg sm:text-xl text-text-main dark:text-white font-bold">
+                            Every clinic wants predictable consult flow.
+                        </p>
+                        <p class="text-base sm:text-lg text-text-muted dark:text-gray-400 leading-relaxed">
+                            But predictable results require predictable systems.
+                        </p>
+                        <p class="text-base sm:text-lg text-text-muted dark:text-gray-400 leading-relaxed">
+                            Most Spine & Pain clinics rely heavily on:
+                        </p>
+
+                        <!-- Bullet Points -->
+                        <div class="space-y-3 sm:space-y-4 ml-4 sm:ml-6">
+                            <div class="flex gap-3 sm:gap-4">
+                                <span class="material-symbols-outlined text-primary flex-shrink-0 mt-1">check_circle</span>
+                                <span class="text-base sm:text-lg text-text-main dark:text-white font-semibold">Referrals</span>
+                            </div>
+                            <div class="flex gap-3 sm:gap-4">
+                                <span class="material-symbols-outlined text-primary flex-shrink-0 mt-1">check_circle</span>
+                                <span class="text-base sm:text-lg text-text-main dark:text-white font-semibold">Walk-ins</span>
+                            </div>
+                            <div class="flex gap-3 sm:gap-4">
+                                <span class="material-symbols-outlined text-primary flex-shrink-0 mt-1">check_circle</span>
+                                <span class="text-base sm:text-lg text-text-main dark:text-white font-semibold">GMB Visibility</span>
+                            </div>
+                            <div class="flex gap-3 sm:gap-4">
+                                <span class="material-symbols-outlined text-primary flex-shrink-0 mt-1">check_circle</span>
+                                <span class="text-base sm:text-lg text-text-main dark:text-white font-semibold">Local SEO Luck</span>
+                            </div>
+                        </div>
+
+                        <p class="text-base sm:text-lg text-text-muted dark:text-gray-400 leading-relaxed pt-4 sm:pt-6">
+                            These channels work only when everything aligns perfectly.
+                        </p>
+
+                        <p class="text-base sm:text-lg text-text-muted dark:text-gray-400 leading-relaxed">
+                            But your pathway isn't built for modern patient behavior — so even motivated patients fall out of the flow.
+                        </p>
+                    </div>
+
+                    <!-- CTA Button -->
+                    <div class="flex items-center justify-center pt-8 sm:pt-12">
+                        <button onclick="openAuthModal()" class="bg-primary hover:bg-red-600 text-white text-base sm:text-lg font-bold h-12 sm:h-14 px-8 sm:px-12 rounded-lg sm:rounded-xl transition-all duration-300 shadow-lg hover:shadow-2xl transform hover:scale-105">
+                            See Exactly Where Patients Are Dropping Off
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 6: Unique Mechanism - 7-Step Diagnostic Flow -->
+    <section class="py-12 sm:py-20 lg:py-32 bg-surface-subtle dark:bg-surface-dark border-y border-border-light dark:border-border-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Header -->
+            <div class="text-center mb-12 sm:mb-16 lg:mb-20 animate-slideUp">
+                <span class="inline-block text-xs sm:text-sm font-bold tracking-wider text-primary uppercase mb-4 sm:mb-6">Your Unique System</span>
+                <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-text-main dark:text-white mb-4 sm:mb-6 leading-tight">
+                    The 7-Step Diagnostic Flow System<br class="hidden sm:block" />Built Exclusively for Spine & Pain Clinics
+                </h2>
+            </div>
+
+            <!-- 7 Steps Grid: 1 col mobile, 2-3 col desktop -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 sm:gap-8 mb-12 sm:mb-16 lg:mb-20">
+                
+                <!-- Step 1 -->
+                <div class="p-6 sm:p-8 rounded-lg sm:rounded-xl border-2 border-border-light dark:border-border-dark bg-white dark:bg-surface-dark hover:border-primary/50 hover:shadow-xl transition-all duration-300 animate-slideUp [animation-delay:0ms]">
+                    <div class="flex items-start gap-4 mb-4">
+                        <div class="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-primary text-white flex items-center justify-center text-lg sm:text-xl font-bold">
+                            1
+                        </div>
+                    </div>
+                    <h3 class="text-lg sm:text-xl font-bold text-text-main dark:text-white mb-3">Patient Pathway Audit</h3>
+                    <p class="text-base sm:text-lg text-text-muted dark:text-gray-400 leading-relaxed">
+                        We map your entire digital-to-consult journey from first touchpoint to scheduled appointment.
+                    </p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="p-6 sm:p-8 rounded-lg sm:rounded-xl border-2 border-border-light dark:border-border-dark bg-white dark:bg-surface-dark hover:border-primary/50 hover:shadow-xl transition-all duration-300 animate-slideUp [animation-delay:100ms]">
+                    <div class="flex items-start gap-4 mb-4">
+                        <div class="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-primary text-white flex items-center justify-center text-lg sm:text-xl font-bold">
+                            2
+                        </div>
+                    </div>
+                    <h3 class="text-lg sm:text-xl font-bold text-text-main dark:text-white mb-3">Leakage Identification</h3>
+                    <p class="text-base sm:text-lg text-text-muted dark:text-gray-400 leading-relaxed">
+                        We locate friction points causing silent consult loss at every stage of your patient funnel.
+                    </p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="p-6 sm:p-8 rounded-lg sm:rounded-xl border-2 border-border-light dark:border-border-dark bg-white dark:bg-surface-dark hover:border-primary/50 hover:shadow-xl transition-all duration-300 animate-slideUp [animation-delay:200ms]">
+                    <div class="flex items-start gap-4 mb-4">
+                        <div class="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-primary text-white flex items-center justify-center text-lg sm:text-xl font-bold">
+                            3
+                        </div>
+                    </div>
+                    <h3 class="text-lg sm:text-xl font-bold text-text-main dark:text-white mb-3">Trust Architecture Analysis</h3>
+                    <p class="text-base sm:text-lg text-text-muted dark:text-gray-400 leading-relaxed">
+                        We evaluate your authority and perception signals across digital channels and clinical messaging.
+                    </p>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="p-6 sm:p-8 rounded-lg sm:rounded-xl border-2 border-border-light dark:border-border-dark bg-white dark:bg-surface-dark hover:border-primary/50 hover:shadow-xl transition-all duration-300 animate-slideUp [animation-delay:300ms]">
+                    <div class="flex items-start gap-4 mb-4">
+                        <div class="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-primary text-white flex items-center justify-center text-lg sm:text-xl font-bold">
+                            4
+                        </div>
+                    </div>
+                    <h3 class="text-lg sm:text-xl font-bold text-text-main dark:text-white mb-3">Conversion Path Structuring</h3>
+                    <p class="text-base sm:text-lg text-text-muted dark:text-gray-400 leading-relaxed">
+                        Clear, guided steps for every type of patient journey — from urgent pain seekers to cautious researchers.
+                    </p>
+                </div>
+
+                <!-- Step 5 -->
+                <div class="p-6 sm:p-8 rounded-lg sm:rounded-xl border-2 border-border-light dark:border-border-dark bg-white dark:bg-surface-dark hover:border-primary/50 hover:shadow-xl transition-all duration-300 animate-slideUp [animation-delay:400ms]">
+                    <div class="flex items-start gap-4 mb-4">
+                        <div class="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-primary text-white flex items-center justify-center text-lg sm:text-xl font-bold">
+                            5
+                        </div>
+                    </div>
+                    <h3 class="text-lg sm:text-xl font-bold text-text-main dark:text-white mb-3">Booking Optimization</h3>
+                    <p class="text-base sm:text-lg text-text-muted dark:text-gray-400 leading-relaxed">
+                        Improve clarity, speed, and completion rate with streamlined appointment scheduling and confirmation.
+                    </p>
+                </div>
+
+                <!-- Step 6 -->
+                <div class="p-6 sm:p-8 rounded-lg sm:rounded-xl border-2 border-border-light dark:border-border-dark bg-white dark:bg-surface-dark hover:border-primary/50 hover:shadow-xl transition-all duration-300 animate-slideUp [animation-delay:500ms]">
+                    <div class="flex items-start gap-4 mb-4">
+                        <div class="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-primary text-white flex items-center justify-center text-lg sm:text-xl font-bold">
+                            6
+                        </div>
+                    </div>
+                    <h3 class="text-lg sm:text-xl font-bold text-text-main dark:text-white mb-3">Show-Up Psychology Setup</h3>
+                    <p class="text-base sm:text-lg text-text-muted dark:text-gray-400 leading-relaxed">
+                        Reminders, clarity reinforcement, and psychological anchors increase kept appointments significantly.
+                    </p>
+                </div>
+
+                <!-- Step 7 -->
+                <div class="p-6 sm:p-8 rounded-lg sm:rounded-xl border-2 border-border-light dark:border-border-dark bg-white dark:bg-surface-dark hover:border-primary/50 hover:shadow-xl transition-all duration-300 animate-slideUp [animation-delay:600ms] md:col-span-2 lg:col-span-1">
+                    <div class="flex items-start gap-4 mb-4">
+                        <div class="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-primary text-white flex items-center justify-center text-lg sm:text-xl font-bold">
+                            7
+                        </div>
+                    </div>
+                    <h3 class="text-lg sm:text-xl font-bold text-text-main dark:text-white mb-3">Operational Integration</h3>
+                    <p class="text-base sm:text-lg text-text-muted dark:text-gray-400 leading-relaxed">
+                        Everything fits seamlessly into your current clinic workflow and EHR without disrupting operations.
+                    </p>
+                </div>
+            </div>
+
+            <!-- CTA Button -->
+            <div class="flex items-center justify-center animate-slideUp [animation-delay:700ms]">
+                <button onclick="openAuthModal()" class="bg-primary hover:bg-red-600 text-white text-base sm:text-lg font-bold h-12 sm:h-14 px-8 sm:px-12 rounded-lg sm:rounded-xl transition-all duration-300 shadow-lg hover:shadow-2xl transform hover:scale-105">
+                    Start With a Free Diagnostic Audit
+                </button>
+            </div>
+        </div>
+    </section>
+    <section class="py-12 sm:py-20 lg:py-32 bg-primary relative overflow-hidden">
+        <div class="absolute inset-0 z-0 opacity-10 dot-grid-white"></div>
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 animate-slideUp">
+            <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-white mb-4 sm:mb-6 leading-tight">
+                Ready to Stop Losing Patients?
+            </h2>
+            <p class="text-base sm:text-lg lg:text-xl text-white/90 mb-8 sm:mb-12 max-w-2xl mx-auto leading-relaxed">
+                Get your clinic's diagnostic audit and see exactly where you're losing consults. It's HIPAA-safe, takes 30 minutes, and shows real dollar impact.
+            </p>
+            
+            <!-- Features Grid: 2x2 -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-10 sm:mb-14 text-left text-white text-sm sm:text-base font-medium">
+                <div class="flex items-center gap-3 p-4 rounded-lg bg-white/10 hover:bg-white/20 transition-all duration-300">
+                    <span class="material-symbols-outlined text-white text-xl flex-shrink-0">check_circle</span>
+                    <span>HIPAA-Compliant Audit</span>
+                </div>
+                <div class="flex items-center gap-3 p-4 rounded-lg bg-white/10 hover:bg-white/20 transition-all duration-300">
+                    <span class="material-symbols-outlined text-white text-xl flex-shrink-0">check_circle</span>
+                    <span>EHR Calendar Sync</span>
+                </div>
+                <div class="flex items-center gap-3 p-4 rounded-lg bg-white/10 hover:bg-white/20 transition-all duration-300">
+                    <span class="material-symbols-outlined text-white text-xl flex-shrink-0">check_circle</span>
+                    <span>Patient Trust Uplift</span>
+                </div>
+                <div class="flex items-center gap-3 p-4 rounded-lg bg-white/10 hover:bg-white/20 transition-all duration-300">
+                    <span class="material-symbols-outlined text-white text-xl flex-shrink-0">check_circle</span>
+                    <span>30-Minute Onboarding</span>
+                </div>
+            </div>
+            
+            <!-- CTA Buttons Grid -->
+            <div class="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6 mb-6 sm:mb-8">
+                <button onclick="openAuthModal()" class="bg-white text-primary hover:bg-gray-100 text-base sm:text-lg font-bold h-12 sm:h-14 px-8 sm:px-12 rounded-lg sm:rounded-xl transition-all duration-300 shadow-2xl hover:shadow-xl flex items-center justify-center gap-2 group transform hover:scale-105">
+                    Get Free Audit
+                    <span class="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                </button>
+                <button onclick="openAuthModal()" class="border-2 border-white/40 hover:border-white text-white text-base sm:text-lg font-bold h-12 sm:h-14 px-8 sm:px-12 rounded-lg sm:rounded-xl transition-all duration-300 flex items-center justify-center gap-2 group hover:bg-white/10">
+                    Book Diagnostic Call
+                    <span class="material-symbols-outlined text-lg">calendar_month</span>
+                </button>
+            </div>
+            
+            <!-- Social Proof -->
+            <p class="text-white/80 text-sm sm:text-base">"The diagnostic alone paid for itself within 30 days." — Medical Director, Austin</p>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2025 Scales Dominator. All rights reserved.</p>
+    <footer class="bg-surface-subtle dark:bg-bg-dark pt-12 sm:pt-16 lg:pt-20 pb-8 sm:pb-10 border-t border-border-light dark:border-border-dark" id="login">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Footer Grid: 4 Columns Responsive -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-12 mb-10 sm:mb-16">
+                <!-- Brand Column -->
+                <div class="col-span-1 sm:col-span-1 animate-slideUp">
+                    <div class="flex items-center gap-2 mb-4 sm:mb-6">
+                        <span class="material-symbols-outlined text-primary text-2xl">medical_services</span>
+                        <span class="text-lg sm:text-xl font-black text-text-main dark:text-white">Scales Dominator</span>
+                    </div>
+                    <p class="text-text-muted dark:text-gray-400 text-xs sm:text-sm leading-relaxed max-w-xs">
+                        The premier patient acquisition infrastructure for high-growth spine and pain clinics.
+                    </p>
+                </div>
+                
+                <!-- Platform Links -->
+                <div class="animate-slideUp [animation-delay:100ms]">
+                    <h4 class="text-text-main dark:text-white font-bold mb-4 text-sm sm:text-base">Platform</h4>
+                    <ul class="space-y-3 text-xs sm:text-sm text-text-muted dark:text-gray-400">
+                        <li><a class="hover:text-primary transition-colors duration-300" href="#methodology">Methodology</a></li>
+                        <li><a class="hover:text-primary transition-colors duration-300" href="#results">Case Studies</a></li>
+                        <li><a class="hover:text-primary transition-colors duration-300" href="#">Pricing</a></li>
+                        <li><a class="hover:text-primary transition-colors duration-300" href="#login">Clinic Login</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Legal Links -->
+                <div class="animate-slideUp [animation-delay:200ms]">
+                    <h4 class="text-text-main dark:text-white font-bold mb-4 text-sm sm:text-base">Legal</h4>
+                    <ul class="space-y-3 text-xs sm:text-sm text-text-muted dark:text-gray-400">
+                        <li><a class="hover:text-primary transition-colors duration-300" href="#">Privacy Policy</a></li>
+                        <li><a class="hover:text-primary transition-colors duration-300" href="#">Terms of Service</a></li>
+                        <li><a class="hover:text-primary transition-colors duration-300" href="#">HIPAA Compliance</a></li>
+                        <li><a class="hover:text-primary transition-colors duration-300" href="#">Cookie Settings</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Contact -->
+                <div class="animate-slideUp [animation-delay:300ms]">
+                    <h4 class="text-text-main dark:text-white font-bold mb-4 text-sm sm:text-base">Get Started</h4>
+                    <button onclick="openAuthModal()" class="w-full bg-primary hover:bg-red-600 text-white text-xs sm:text-sm font-bold h-10 sm:h-11 px-4 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
+                        Free Audit
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Footer Bottom -->
+            <div class="border-t border-border-light dark:border-border-dark pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 sm:gap-6">
+                <p class="text-slate-400 dark:text-gray-500 text-xs">© 2024 Scales Dominator. All rights reserved.</p>
+                <div class="flex gap-4">
+                    <a class="text-slate-400 dark:text-gray-500 hover:text-primary transition-colors duration-300 hover:scale-110 transform" href="#" title="Email">
+                        <span class="material-symbols-outlined text-lg">mail</span>
+                    </a>
+                    <a class="text-slate-400 dark:text-gray-500 hover:text-primary transition-colors duration-300 hover:scale-110 transform" href="#" title="Web">
+                        <span class="material-symbols-outlined text-lg">public</span>
+                    </a>
+                </div>
+            </div>
         </div>
     </footer>
 
+    <!-- Authentication Modal -->
+    <div id="authModal" class="fixed inset-0 z-[100] hidden">
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm animate-fadeIn" onclick="closeAuthModal()"></div>
+        <div class="absolute inset-0 flex items-center justify-center p-4 animate-scaleIn">
+            <div class="relative bg-white dark:bg-surface-dark rounded-lg sm:rounded-2xl shadow-2xl max-w-md w-full p-6 sm:p-8 transform transition-all">
+                <button onclick="closeAuthModal()" class="absolute top-4 right-4 text-text-muted hover:text-text-main hover:scale-110 dark:text-gray-400 dark:hover:text-white transition-all duration-300">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+                
+                <!-- Header -->
+                <div class="flex items-center gap-2 sm:gap-3 mb-6 sm:mb-8">
+                    <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">medical_services</span>
+                    <h2 class="text-xl sm:text-2xl font-bold text-text-main dark:text-white">Get Started</h2>
+                </div>
+                
+                <!-- Tab Switcher -->
+                <div class="flex gap-2 mb-6 sm:mb-8 bg-surface-subtle dark:bg-bg-dark p-1 rounded-lg sm:rounded-xl">
+                    <button onclick="switchAuthTab('login')" id="loginTab" class="flex-1 py-2 sm:py-3 px-3 sm:px-4 rounded-md sm:rounded-lg text-xs sm:text-sm font-semibold transition-all duration-300 bg-white dark:bg-surface-dark text-text-main dark:text-white shadow-sm transform hover:scale-105">
+                        Login
+                    </button>
+                    <button onclick="switchAuthTab('signup')" id="signupTab" class="flex-1 py-2 sm:py-3 px-3 sm:px-4 rounded-md sm:rounded-lg text-xs sm:text-sm font-semibold transition-all duration-300 text-text-muted dark:text-gray-400 hover:text-text-main dark:hover:text-gray-300">
+                        Sign Up
+                    </button>
+                </div>
+                
+                <!-- Login Form -->
+                <form id="loginForm" class="space-y-3 sm:space-y-4 animate-slideUp">
+                    <div>
+                        <label class="block text-xs sm:text-sm font-semibold text-text-main dark:text-white mb-2">Email Address</label>
+                        <input type="email" required class="w-full px-3 sm:px-4 py-2 sm:py-3 rounded-lg border border-border-light dark:border-border-dark bg-white dark:bg-bg-dark text-text-main dark:text-white placeholder-text-muted dark:placeholder-gray-500 focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-300 text-sm" placeholder="you@example.com">
+                    </div>
+                    <div>
+                        <label class="block text-xs sm:text-sm font-semibold text-text-main dark:text-white mb-2">Password</label>
+                        <input type="password" required class="w-full px-3 sm:px-4 py-2 sm:py-3 rounded-lg border border-border-light dark:border-border-dark bg-white dark:bg-bg-dark text-text-main dark:text-white placeholder-text-muted dark:placeholder-gray-500 focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-300 text-sm" placeholder="••••••••">
+                    </div>
+                    <button type="submit" class="w-full bg-primary hover:bg-red-600 text-white text-sm sm:text-base font-bold py-2 sm:py-3 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
+                        Sign In
+                    </button>
+                </form>
+                
+                <!-- Signup Form -->
+                <form id="signupForm" class="space-y-3 sm:space-y-4 hidden animate-slideUp">
+                    <div>
+                        <label class="block text-xs sm:text-sm font-semibold text-text-main dark:text-white mb-2">Full Name</label>
+                        <input type="text" required class="w-full px-3 sm:px-4 py-2 sm:py-3 rounded-lg border border-border-light dark:border-border-dark bg-white dark:bg-bg-dark text-text-main dark:text-white placeholder-text-muted dark:placeholder-gray-500 focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-300 text-sm" placeholder="Dr. John Doe">
+                    </div>
+                    <div>
+                        <label class="block text-xs sm:text-sm font-semibold text-text-main dark:text-white mb-2">Clinic Name</label>
+                        <input type="text" required class="w-full px-3 sm:px-4 py-2 sm:py-3 rounded-lg border border-border-light dark:border-border-dark bg-white dark:bg-bg-dark text-text-main dark:text-white placeholder-text-muted dark:placeholder-gray-500 focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-300 text-sm" placeholder="Your Clinic">
+                    </div>
+                    <div>
+                        <label class="block text-xs sm:text-sm font-semibold text-text-main dark:text-white mb-2">Email Address</label>
+                        <input type="email" required class="w-full px-3 sm:px-4 py-2 sm:py-3 rounded-lg border border-border-light dark:border-border-dark bg-white dark:bg-bg-dark text-text-main dark:text-white placeholder-text-muted dark:placeholder-gray-500 focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-300 text-sm" placeholder="you@example.com">
+                    </div>
+                    <div>
+                        <label class="block text-xs sm:text-sm font-semibold text-text-main dark:text-white mb-2">Create Password</label>
+                        <input type="password" required class="w-full px-3 sm:px-4 py-2 sm:py-3 rounded-lg border border-border-light dark:border-border-dark bg-white dark:bg-bg-dark text-text-main dark:text-white placeholder-text-muted dark:placeholder-gray-500 focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-300 text-sm" placeholder="••••••••">
+                    </div>
+                    <button type="submit" class="w-full bg-primary hover:bg-red-600 text-white text-sm sm:text-base font-bold py-2 sm:py-3 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
+                        Create Account
+                    </button>
+                </form>
+                
+                <!-- Footer -->
+                <div class="mt-6 sm:mt-8 text-center text-xs text-text-muted dark:text-gray-400">
+                    <p>By continuing, you agree to our <a href="#" class="text-primary hover:text-red-600 transition-colors underline font-semibold">Terms</a> and <a href="#" class="text-primary hover:text-red-600 transition-colors underline font-semibold">Privacy</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
     <script src="script.js"></script>
 </body>
 </html>
